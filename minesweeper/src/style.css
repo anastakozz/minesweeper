@@ -2,6 +2,12 @@
 body {
   font-family: 'Chakra Petch', sans-serif;
   width: 100%;
+  background-color: white;
+}
+
+.dark-mode {
+    filter: invert(90%);
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .wrapper {
@@ -42,6 +48,7 @@ body {
   font-size: 16px;
   text-align: center;
   padding: 0;
+  font-weight: 700;
 }
 
 
@@ -95,7 +102,8 @@ body {
 }
 
 .new-game-btn:hover,
-.sound-btn:hover {
+.sound-btn:hover,
+.theme-btn:hover {
     filter: invert(76%) sepia(36%) saturate(7494%) hue-rotate(333deg) brightness(108%) contrast(102%);
 }
 
@@ -109,6 +117,19 @@ body {
     background-repeat: no-repeat;
     background-color: transparent;
     transition: all 0.15s ease-in-out;
+}
+
+.theme-btn {
+    cursor: pointer;
+    border: none;
+    background-image: url(./assets/icons8-moon-80.png);
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    transition: all 0.15s ease-in-out;
+    margin-left: 16px;
 }
 
 .sound-on {
@@ -139,13 +160,14 @@ body {
 }
 
 .flag-btn:hover {
-  background-color: rgba(0, 0, 0, 0.1) ;
+  border-color: red;
 }
 
 .flag-active {
     background-color: rgba(0, 0, 0, 0.1) ;
-    
 }
+
+
 
 .cell-container {
   display: grid;
@@ -158,6 +180,7 @@ body {
 
 
 .cell {
+    cursor: pointer;
     width: 20px;
     height: 20px;
     background-color: rgba(0, 0, 0, 0.25);
