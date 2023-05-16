@@ -15,7 +15,9 @@ let main,
   gameHead,
   gameField,
   statDiv,
+  btnDiv,
   soundBtn,
+  themeBtn,
   selectSize,
   opt1,
   opt2,
@@ -64,9 +66,16 @@ export function generateLayout() {
     gameSetup.classList.add('game-setup');
     game.appendChild(gameSetup);
 
+    btnDiv = document.createElement('div');
+    gameSetup.appendChild(btnDiv);
+
     soundBtn = document.createElement('button');
     soundBtn.classList.add('sound-btn');
-    gameSetup.appendChild(soundBtn);
+    btnDiv.appendChild(soundBtn);
+
+    themeBtn = document.createElement('button');
+    themeBtn.classList.add('theme-btn');
+    btnDiv.appendChild(themeBtn);
 
     selectSize = document.createElement('select');
     selectSize.classList.add('choose-size');
@@ -112,8 +121,8 @@ export function generateLayout() {
     minesNumInput = document.createElement('input');
     minesNumInput.classList.add('mines-num');
     minesNumInput.type = 'number';
-    minesNumInput.value = '10'
     minesDiv.appendChild(minesNumInput);
+    minesNumInput.value = 10;
 
     //FIELD
     gameField = document.createElement('div');
@@ -181,4 +190,25 @@ export function generateLayout() {
 //FINAL APPEND
     document.body.appendChild(main);
     console.log('layout generated');
+}
+
+export function generateCells(obj) {
+    let num = 0;
+    switch (obj.difficulty) {
+        case 'easy':
+            num = 100;
+            cellContainer.classList.add('easy');
+            break;
+        case 'medium':
+            num = 225;
+            break;
+        case 'hard':
+            num = 625;
+    }
+
+    for (let i = 1; i <= num; i++){
+        let cell = document.createElement('div');
+        cell.classList.add('cell');
+        cellContainer.appendChild(cell);
+    }
 }
