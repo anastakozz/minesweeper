@@ -178,6 +178,14 @@ body {
   grid-template-columns: repeat(10, 1fr);    
 }
 
+.medium {
+    grid-template-columns: repeat(15, 1fr);
+}
+
+.hard {
+    grid-template-columns: repeat(25, 1fr);
+}
+
 
 .cell {
     cursor: pointer;

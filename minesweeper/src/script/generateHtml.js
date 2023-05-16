@@ -193,17 +193,22 @@ export function generateLayout() {
 }
 
 export function generateCells(obj) {
+    cellContainer.innerHTML = '';
+    cellContainer.classList.remove('easy', 'medium', 'hard');
     let num = 0;
     switch (obj.difficulty) {
-        case 'easy':
+        case '10':
             num = 100;
             cellContainer.classList.add('easy');
             break;
-        case 'medium':
+        case '15':
             num = 225;
+            cellContainer.classList.add('medium');
             break;
-        case 'hard':
+        case '25':
             num = 625;
+            cellContainer.classList.add('hard');
+            break;
     }
 
     for (let i = 1; i <= num; i++){
