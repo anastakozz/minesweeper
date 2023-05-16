@@ -1,2 +1,7 @@
 import './style.css';
-console.log('hello world');
+import {generateLayout} from './script/generateHtml';
+
+
+generateLayout();
+
+

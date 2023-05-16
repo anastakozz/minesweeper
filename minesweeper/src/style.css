@@ -1,4 +1,242 @@
-.hello {
+
+body {
+  font-family: 'Chakra Petch', sans-serif;
+  width: 100%;
+}
+
+.wrapper {
+  margin: auto;
+  width: 100%;
+  text-align: center;
+}
+
+.game {
+    margin: auto;
+    width: 60%;
+    border: 1px dashed black;
+}
+
+.game-head,
+.game-setup,
+.game-field,
+.statistics {
+    min-height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed black;
+    padding: 15px 5%;
+}
+
+.mines-num,
+.timer {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  border: 1px dashed black;
+  width: 50px;
+  height: 25px;
+  color:coral;
+  font-family: 'Chakra Petch', sans-serif;
+  font-size: 16px;
+  text-align: center;
+  padding: 0;
+}
+
+
+
+.mines-num-div::before {
+    padding-right: 5px;
+    content: '';
+    background-image: url('./assets/bomb.png');
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: center;
+    width: 25px;
+    height: 25px;
+    float: left;
+}
+
+.timer-div {
+    display: flex;
+}
+.timer-div::after {
+    padding-left: 5px;
+    content: '';
+    background-image: url('./assets/icons8-timer-64.png');
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    background-position: center;
+    width: 25px;
+    height: 25px;
+    float: right;
+}
+
+.choose-size {
+    cursor: pointer;
+    background-color: none;
+    border: 1px dashed black;
+    width: 75px;
+    height: 25px;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.new-game-btn {
+    cursor: pointer;
+    border: none;
+    background-image: url(./assets/smile-5103.svg);
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    transition: all 0.15s ease-in-out;
+}
+
+.new-game-btn:hover,
+.sound-btn:hover {
+    filter: invert(76%) sepia(36%) saturate(7494%) hue-rotate(333deg) brightness(108%) contrast(102%);
+}
+
+.sound-btn {
+    cursor: pointer;
+    border: none;
+    background-image: url(./assets/icons8-no-audio-80.png);
+    background-size: 30px;
+    width: 30px;
+    height: 30px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    transition: all 0.15s ease-in-out;
+}
+
+.sound-on {
+    background-image: url(./assets/icons8-sound-80.png);
+}
+
+.game-field {
+    position: relative;
+    justify-content: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.flag-btn {
+    cursor: pointer;
+    z-index: 1;
+    position: absolute;
+    top: 15px;
+    right: 5%;
+    background-image: url(./assets/icons8-flag-96.png);
+    background-size: 20px;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    border: 1px dashed black;
+}
+
+.flag-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1) ;
+}
+
+.flag-active {
+    background-color: rgba(0, 0, 0, 0.1) ;
+    
+}
+
+.cell-container {
+  display: grid;
+  gap: 3px;
+}
+
+.easy {
+  grid-template-columns: repeat(10, 1fr);    
+}
+
+
+.cell {
+    width: 20px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+.cell-open {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.cell-flag,
+.cell-bomb {
+    background-size: 18px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.cell-bomb {
+    background-image: url(./assets/bomb.png);
+    filter: invert(100%);
+    background-size: 15px;
+    background-color: aqua;
+}
+
+.cell-flag {
+    background-image: url(./assets/icons8-flag-48.png);
+}
+
+.cell-1 {
+    color: blue;
+}
+.cell-2 {
+    color: green;
+}
+
+.cell-3 {
     color: red;
 }
+.statistics-div {
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stat-title {
+    margin-bottom: 0;
+}
+
+.hist-title {
+    margin-top: 5px;
+}
+
+.statistics {
+    border-bottom: none;
+}
+
+
+@media (max-width: 1280px) {
+  .game {
+  width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+    .game {
+    width: 90%;
+    }
+
+    .cell-container {
+        gap: 1.5px;
+      }
+
+      .cell {
+          width: 16px;
+          height: 16px;
+          font-size: 12.5px;
+      }
+
+      .flag-btn {
+        width: 30px;
+        height: 30px;
+
+      }
+  }
 
