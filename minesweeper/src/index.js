@@ -1,3 +1,11 @@
+//TODO:
+// implement startTimer()
+// implement generateBombs()
+// implement remainings bombs count
+
+
+
+
 import './style.css';
 import {generateLayout} from './script/generateHtml';
 import { generateCells } from './script/generateHtml';
@@ -42,16 +50,15 @@ function clickCell() {
 
     cells.forEach((cell) => {
         cell.addEventListener('click', (evt) => {
-            countClicks()
             index = cellsArr.indexOf(cell);
             if (currentState.flagMode) {
                 putFlag(evt, index);
             }else{
+                countClicks()
                 openCell(evt, index)
             }
         });
         cell.addEventListener('contextmenu', (evt) => {
-            countClicks()
             if(!currentState.flagMode){
                 index = cellsArr.indexOf(cell);
                 putFlag(evt, index);
@@ -66,10 +73,12 @@ function countClicks() {
     if (currentState.clicksNum === 0) {
         console.log('START');
         currentState.clicksNum += 1;
+        // startTimer();
+        // generateBombs();
     } else {
         currentState.clicksNum +=1;
     }
-    clickCount.textContent = 'Clicks: ' + currentState.clicksNum;
+    clickCount.textContent = 'Cell clicks: ' + currentState.clicksNum;
 }
 
 inputSize.addEventListener('change', () => {

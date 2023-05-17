@@ -139,12 +139,10 @@ export function generateLayout() {
     flagCount = document.createElement('div');
     flagCount.classList.add('flag-count');
     gameField.appendChild(flagCount);
-    flagCount.textContent = 'Flags put: 0'
 
     clicksCount = document.createElement('div');
     clicksCount.classList.add('clicks-count');
     gameField.appendChild(clicksCount);
-    clicksCount.textContent = 'Clicks: 0'
 
     cellContainer = document.createElement('div');
     cellContainer.classList.add('cell-container');
@@ -206,7 +204,7 @@ export function generateLayout() {
 
 export function generateCells(obj) {
     flagCount.textContent = 'Flags put: 0'
-    clicksCount.textContent = 'Clicks: 0'
+    clicksCount.textContent = 'Cell clicks: 0'
     cellContainer.innerHTML = '';
     cellContainer.classList.remove('easy', 'medium', 'hard');
     let num = 0;
