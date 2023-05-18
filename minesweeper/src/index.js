@@ -4,20 +4,22 @@
 // implement remainings bombs count
 
 
-
-
 import './style.css';
 import {generateLayout} from './script/generateHtml';
 import { generateCells } from './script/generateHtml';
 import { openCell } from './script/clickCells';
 import { putFlag } from './script/clickCells';
+import { generateMinesArr } from './script/generateMines';
 
 const currentState = {
   difficulty: '10',
   mines: 10,
   darkMode: false,
   flagMode: false,
-  clicksNum: 0
+  clicksNum: 0,
+  cells: '',
+  cellsArr: [],
+  minesArr: []
 }
 
 generateLayout();
@@ -28,7 +30,9 @@ const flagBtn = document.querySelector('.flag-btn');
 const inputSize = document.querySelector('.choose-size');
 const newGameBtn = document.querySelector('.new-game-btn');
 const minesNum = document.querySelector('.mines-num');
-const clickCount = document.querySelector('.clicks-count');
+
+currentState.cells = document.querySelectorAll('.cell');
+currentState.cellsArr = Array.from(currentState.cells);
 
 
 document.addEventListener('contextmenu', (evt) => evt.preventDefault());
@@ -44,23 +48,20 @@ flagBtn.addEventListener('click', () => {
 })
 
 function clickCell() {
-    const cells = document.querySelectorAll('.cell');
-    const cellsArr = Array.from(cells);
     let index = null;
-
-    cells.forEach((cell) => {
+    currentState.cells.forEach((cell) => {
         cell.addEventListener('click', (evt) => {
-            index = cellsArr.indexOf(cell);
+            index = currentState.cellsArr.indexOf(cell);
             if (currentState.flagMode) {
                 putFlag(evt, index);
             }else{
-                countClicks()
+                countClicks(index)
                 openCell(evt, index)
             }
         });
         cell.addEventListener('contextmenu', (evt) => {
             if(!currentState.flagMode){
-                index = cellsArr.indexOf(cell);
+                index = currentState.cellsArr.indexOf(cell);
                 putFlag(evt, index);
             }
         })
@@ -68,13 +69,14 @@ function clickCell() {
 }
 clickCell()
 
-function countClicks() {
+function countClicks(index) {
     const clickCount = document.querySelector('.clicks-count');
     if (currentState.clicksNum === 0) {
         console.log('START');
         currentState.clicksNum += 1;
         // startTimer();
         // generateBombs();
+        generateMinesArr(currentState.mines, index);
     } else {
         currentState.clicksNum +=1;
     }
@@ -83,13 +85,16 @@ function countClicks() {
 
 inputSize.addEventListener('change', () => {
 currentState.difficulty = inputSize.value;
-console.log(currentState.difficulty);
+console.log('chosen size: ' + currentState.difficulty);
 })
 
 newGameBtn.addEventListener('click',()=> {
-    currentState.clicksNum = 0;
     generateCells(currentState);
+    currentState.clicksNum = 0;
+    currentState.cells = document.querySelectorAll('.cell');
+    currentState.cellsArr = Array.from(currentState.cells);
     clickCell();
+    console.log('check array length: ' + currentState.cellsArr.length);
 })
 
 minesNum.addEventListener('change', () => {
