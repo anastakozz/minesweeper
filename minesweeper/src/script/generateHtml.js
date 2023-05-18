@@ -4,228 +4,225 @@
  * @return {html structure}
  */
 
-
-
-let main,
-  wrapper,
-  mainTitle,
-  flagExpl,
-  game,
-  gameSetup,
-  gameHead,
-  gameField,
-  statDiv,
-  btnDiv,
-  soundBtn,
-  themeBtn,
-  selectSize,
-  opt1,
-  opt2,
-  opt3,
-  timerDiv,
-  timer,
-  newGameBtn,
-  minesDiv,
-  minesNumInput,
-  flagBtn,
-  flagCount,
-  clicksCount,
-  cellContainer,
-  statTitle,
-  statistics,
-  histNum,
-  histDate,
-  histTime,
-  histClicks,
-  titleNum,
-  titleDate,
-  titleTime,
-  titleClicks;
-
+let main;
+let wrapper;
+let mainTitle;
+let flagExpl;
+let game;
+let gameSetup;
+let gameHead;
+let gameField;
+let statDiv;
+let btnDiv;
+let soundBtn;
+let themeBtn;
+let selectSize;
+let opt1;
+let opt2;
+let opt3;
+let timerDiv;
+let timer;
+let newGameBtn;
+let minesDiv;
+let minesNumInput;
+let flagBtn;
+let flagCount;
+let clicksCount;
+let cellContainer;
+let statTitle;
+let statistics;
+let histNum;
+let histDate;
+let histTime;
+let histClicks;
+let titleNum;
+let titleDate;
+let titleTime;
+let titleClicks;
 
 export function generateLayout() {
-    main = document.createElement('main');
+  main = document.createElement('main');
 
-    wrapper = document.createElement('div');
-    wrapper.classList.add('wrapper');
-    main.appendChild(wrapper);
+  wrapper = document.createElement('div');
+  wrapper.classList.add('wrapper');
+  main.appendChild(wrapper);
 
-    mainTitle = document.createElement('h1');
-    mainTitle.classList.add('main-title');
-    mainTitle.textContent = 'Minesweeper game';
-    wrapper.appendChild(mainTitle);
+  mainTitle = document.createElement('h1');
+  mainTitle.classList.add('main-title');
+  mainTitle.textContent = 'Minesweeper game';
+  wrapper.appendChild(mainTitle);
 
-    flagExpl = document.createElement('h3');
-    flagExpl.textContent = 'RightClick to put a flag';
-    wrapper.appendChild(flagExpl);
+  flagExpl = document.createElement('h3');
+  flagExpl.textContent = 'RightClick to put a flag';
+  wrapper.appendChild(flagExpl);
 
-    game = document.createElement('div');
-    game.classList.add('game');
-    wrapper.appendChild(game);
+  game = document.createElement('div');
+  game.classList.add('game');
+  wrapper.appendChild(game);
 
-    //SETUP
-    gameSetup = document.createElement('div');
-    gameSetup.classList.add('game-setup');
-    game.appendChild(gameSetup);
+  // SETUP
+  gameSetup = document.createElement('div');
+  gameSetup.classList.add('game-setup');
+  game.appendChild(gameSetup);
 
-    btnDiv = document.createElement('div');
-    gameSetup.appendChild(btnDiv);
+  btnDiv = document.createElement('div');
+  gameSetup.appendChild(btnDiv);
 
-    soundBtn = document.createElement('button');
-    soundBtn.classList.add('sound-btn');
-    btnDiv.appendChild(soundBtn);
+  soundBtn = document.createElement('button');
+  soundBtn.classList.add('sound-btn');
+  btnDiv.appendChild(soundBtn);
 
-    themeBtn = document.createElement('button');
-    themeBtn.classList.add('theme-btn');
-    btnDiv.appendChild(themeBtn);
+  themeBtn = document.createElement('button');
+  themeBtn.classList.add('theme-btn');
+  btnDiv.appendChild(themeBtn);
 
-    selectSize = document.createElement('select');
-    selectSize.classList.add('choose-size');
-    gameSetup.appendChild(selectSize);
+  selectSize = document.createElement('select');
+  selectSize.classList.add('choose-size');
+  gameSetup.appendChild(selectSize);
 
-    opt1 = document.createElement('option');
-    opt1.value = 10;
-    opt1.textContent = 'easy';
-    selectSize.appendChild(opt1);
+  opt1 = document.createElement('option');
+  opt1.value = 10;
+  opt1.textContent = 'easy';
+  selectSize.appendChild(opt1);
 
-    opt2 = document.createElement('option');
-    opt2.value = 15;
-    opt2.textContent = 'medium';
-    selectSize.appendChild(opt2);
+  opt2 = document.createElement('option');
+  opt2.value = 15;
+  opt2.textContent = 'medium';
+  selectSize.appendChild(opt2);
 
-    opt3 = document.createElement('option');
-    opt3.value = 25;
-    opt3.textContent = 'hard';
-    selectSize.appendChild(opt3);
+  opt3 = document.createElement('option');
+  opt3.value = 25;
+  opt3.textContent = 'hard';
+  selectSize.appendChild(opt3);
 
-    //HEAD
-    gameHead = document.createElement('div');
-    gameHead.classList.add('game-head');
-    game.appendChild(gameHead);
+  // HEAD
+  gameHead = document.createElement('div');
+  gameHead.classList.add('game-head');
+  game.appendChild(gameHead);
 
-    timerDiv = document.createElement('div');
-    timerDiv.classList.add('timer-div');
-    gameHead.appendChild(timerDiv);
+  timerDiv = document.createElement('div');
+  timerDiv.classList.add('timer-div');
+  gameHead.appendChild(timerDiv);
 
-    timer = document.createElement('span');
-    timer.classList.add('timer');
-    timer.textContent = "0:00";
-    timerDiv.appendChild(timer);
+  timer = document.createElement('span');
+  timer.classList.add('timer');
+  timer.textContent = '0:00';
+  timerDiv.appendChild(timer);
 
-    newGameBtn = document.createElement('button');
-    newGameBtn.classList.add('new-game-btn');
-    gameHead.appendChild(newGameBtn);
+  newGameBtn = document.createElement('button');
+  newGameBtn.classList.add('new-game-btn');
+  gameHead.appendChild(newGameBtn);
 
-    minesDiv = document.createElement('div');
-    minesDiv.classList.add('mines-num-div');
-    gameHead.appendChild(minesDiv);
+  minesDiv = document.createElement('div');
+  minesDiv.classList.add('mines-num-div');
+  gameHead.appendChild(minesDiv);
 
-    minesNumInput = document.createElement('input');
-    minesNumInput.classList.add('mines-num');
-    minesNumInput.type = 'number';
-    minesDiv.appendChild(minesNumInput);
-    minesNumInput.value = 10;
+  minesNumInput = document.createElement('input');
+  minesNumInput.classList.add('mines-num');
+  minesNumInput.type = 'number';
+  minesDiv.appendChild(minesNumInput);
+  minesNumInput.value = 10;
 
-    //FIELD
-    gameField = document.createElement('div');
-    gameField.classList.add('game-field');
-    game.appendChild(gameField);
+  // FIELD
+  gameField = document.createElement('div');
+  gameField.classList.add('game-field');
+  game.appendChild(gameField);
 
-    flagBtn = document.createElement('button');
-    flagBtn.classList.add('flag-btn');
-    flagBtn.type = 'submit';
-    gameField.appendChild(flagBtn);
+  flagBtn = document.createElement('button');
+  flagBtn.classList.add('flag-btn');
+  flagBtn.type = 'submit';
+  gameField.appendChild(flagBtn);
 
-    flagCount = document.createElement('div');
-    flagCount.classList.add('flag-count');
-    gameField.appendChild(flagCount);
+  flagCount = document.createElement('div');
+  flagCount.classList.add('flag-count');
+  gameField.appendChild(flagCount);
 
-    clicksCount = document.createElement('div');
-    clicksCount.classList.add('clicks-count');
-    gameField.appendChild(clicksCount);
+  clicksCount = document.createElement('div');
+  clicksCount.classList.add('clicks-count');
+  gameField.appendChild(clicksCount);
 
-    cellContainer = document.createElement('div');
-    cellContainer.classList.add('cell-container');
-    gameField.appendChild(cellContainer);
+  cellContainer = document.createElement('div');
+  cellContainer.classList.add('cell-container');
+  gameField.appendChild(cellContainer);
 
-    //STATS
-    statDiv = document.createElement('div');
-    statDiv.classList.add('statistics-div');
-    game.appendChild(statDiv);
+  // STATS
+  statDiv = document.createElement('div');
+  statDiv.classList.add('statistics-div');
+  game.appendChild(statDiv);
 
-    statTitle = document.createElement('h3');
-    statTitle.classList.add('stat-title');
-    statDiv.appendChild(statTitle);
+  statTitle = document.createElement('h3');
+  statTitle.classList.add('stat-title');
+  statDiv.appendChild(statTitle);
 
-    statistics = document.createElement('div');
-    statistics.classList.add('statistics');
-    statDiv.appendChild(statistics);
+  statistics = document.createElement('div');
+  statistics.classList.add('statistics');
+  statDiv.appendChild(statistics);
 
-    histNum = document.createElement('div');
-    histNum.classList.add('history-num');
-    statistics.appendChild(histNum);
+  histNum = document.createElement('div');
+  histNum.classList.add('history-num');
+  statistics.appendChild(histNum);
 
-    titleNum = document.createElement('h4');
-    titleNum.classList.add('hist-title');
-    titleNum.textContent = 'num'
-    histNum.appendChild(titleNum);
+  titleNum = document.createElement('h4');
+  titleNum.classList.add('hist-title');
+  titleNum.textContent = 'num';
+  histNum.appendChild(titleNum);
 
-    histDate = document.createElement('div');
-    histDate.classList.add('history-date');
-    statistics.appendChild(histDate);
+  histDate = document.createElement('div');
+  histDate.classList.add('history-date');
+  statistics.appendChild(histDate);
 
-    titleDate = document.createElement('h4');
-    titleDate.classList.add('hist-title');
-    titleDate.textContent = 'date';
-    histDate.appendChild(titleDate);
+  titleDate = document.createElement('h4');
+  titleDate.classList.add('hist-title');
+  titleDate.textContent = 'date';
+  histDate.appendChild(titleDate);
 
-    histTime = document.createElement('div');
-    histTime.classList.add('history-time');
-    statistics.appendChild(histTime);
+  histTime = document.createElement('div');
+  histTime.classList.add('history-time');
+  statistics.appendChild(histTime);
 
-    titleTime = document.createElement('h4');
-    titleTime.classList.add('hist-title');
-    titleTime.textContent = 'time';
-    histTime.appendChild(titleTime);
+  titleTime = document.createElement('h4');
+  titleTime.classList.add('hist-title');
+  titleTime.textContent = 'time';
+  histTime.appendChild(titleTime);
 
-    histClicks = document.createElement('div');
-    histClicks.classList.add('history-clicks');
-    statistics.appendChild(histClicks);
+  histClicks = document.createElement('div');
+  histClicks.classList.add('history-clicks');
+  statistics.appendChild(histClicks);
 
-    titleClicks = document.createElement('h4');
-    titleClicks.classList.add('hist-title');
-    titleClicks.textContent = 'clicks';
-    histClicks.appendChild(titleClicks);
+  titleClicks = document.createElement('h4');
+  titleClicks.classList.add('hist-title');
+  titleClicks.textContent = 'clicks';
+  histClicks.appendChild(titleClicks);
 
-//FINAL APPEND
-    document.body.appendChild(main);
-    console.log('layout generated');
+  // FINAL APPEND
+  document.body.appendChild(main);
+  console.log('layout generated');
 }
 
 export function generateCells(obj) {
-    flagCount.textContent = 'Flags put: 0'
-    clicksCount.textContent = 'Cell clicks: 0'
-    cellContainer.innerHTML = '';
-    cellContainer.classList.remove('easy', 'medium', 'hard');
-    let num = 0;
-    switch (obj.difficulty) {
-        case '10':
-            num = 100;
-            cellContainer.classList.add('easy');
-            break;
-        case '15':
-            num = 225;
-            cellContainer.classList.add('medium');
-            break;
-        case '25':
-            num = 625;
-            cellContainer.classList.add('hard');
-            break;
-    }
+  flagCount.textContent = 'Flags put: 0';
+  clicksCount.textContent = 'Cell clicks: 0';
+  cellContainer.innerHTML = '';
+  cellContainer.classList.remove('easy', 'medium', 'hard');
+  let num = 0;
+  switch (obj.difficulty) {
+    case '10':
+      num = 100;
+      cellContainer.classList.add('easy');
+      break;
+    case '15':
+      num = 225;
+      cellContainer.classList.add('medium');
+      break;
+    case '25':
+      num = 625;
+      cellContainer.classList.add('hard');
+      break;
+  }
 
-    for (let i = 1; i <= num; i++){
-        let cell = document.createElement('div');
-        cell.classList.add('cell');
-        cellContainer.appendChild(cell);
-    }
+  for (let i = 1; i <= num; i++) {
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
+    cellContainer.appendChild(cell);
+  }
 }
