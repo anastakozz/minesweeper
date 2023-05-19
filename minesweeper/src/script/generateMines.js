@@ -13,10 +13,8 @@ export function generateMinesArr(num, size, firstIndex) {
         generateIndexes();
       }
     }
-
     generateIndexes();
   }
-  //   console.log(newMinesArr);
   return newMinesArr;
 }
 
@@ -26,8 +24,38 @@ export function fillMatrix(obj) {
   for (let b = 0; b < obj.minesArr.length; b += 1) {
     const i = obj.minesArr[b] % n;
     const j = (obj.minesArr[b] - i) / n;
-    // console.log(`j = ${j} i = ${i}`);
-    obj.matrix[j].splice(i, 1, 'bomb');
+    console.log(`j = ${j} i = ${i}`);
+    obj.matrix[j].splice(i, 1, 'b');
+    fillNums(obj.matrix, i, j);
   }
   console.log(obj.matrix);
+}
+
+function fillNums(matrix, i, j){
+for (let n = j - 1; n <= j + 1; n += 1) {
+ if (n >= 0 && n < matrix.length) {
+    if(!matrix[n][i+1] && i < matrix[j].length - 1){
+        matrix[n].splice(i+1, 1, 1);
+    } else if (matrix[n][i+1] !== 'b' && i < matrix[j].length - 1){
+        matrix[n].splice(i+1, 1, matrix[n][i+1] + 1);
+    }
+
+    if(!matrix[n][i]){
+        matrix[n].splice(i, 1, 1);
+    } else if (matrix[n][i] !== 'b'){
+        matrix[n].splice(i, 1, matrix[n][i] + 1);
+    }
+
+    if(!matrix[n][i-1] && i >= 1){
+        matrix[n].splice(i-1, 1, 1);
+    } else if (matrix[n][i-1] !== 'b' && i >= 1){
+        matrix[n].splice(i-1, 1, matrix[n][i-1] + 1);
+    }
+ }
+ 
+  
+    
+}
+
+  
 }

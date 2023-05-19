@@ -7,6 +7,7 @@ export function openCell(evt, index, arr) {
     alert('GAME OVER');
     // gameOver()
   } else {
+    
     evt.currentTarget.classList.add('cell-open');
     console.log(`cell opened on index ${index}`);
   }
