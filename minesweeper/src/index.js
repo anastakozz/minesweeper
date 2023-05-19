@@ -83,21 +83,21 @@ function clickCell() {
 clickCell();
 
 inputSize.addEventListener('change', () => {
-  currState.difficulty = inputSize.value;
-  console.log(`chosen size: ${currState.difficulty}`);
+  minesNum.value = inputSize.value;
 });
 
 newGameBtn.addEventListener('click', () => {
+  currState.difficulty = inputSize.value;
+  currState.minesCount = +minesNum.value;
   generateCells(currState);
   generateZeroMatrix(currState, +currState.difficulty);
   currState.clicksNum = 0;
   currState.cells = document.querySelectorAll('.cell');
   currState.cellsArr = Array.from(currState.cells);
   clickCell();
-  console.log(`check array length: ${currState.cellsArr.length}`);
+//   console.log(`check array length: ${currState.cellsArr.length}`);
 });
 
-minesNum.addEventListener('change', () => {
-  currState.minesCount = +minesNum.value;
-  console.log(currState.minesCount);
-});
+// minesNum.addEventListener('change', () => {
+//   console.log(currState.minesCount);
+// });
