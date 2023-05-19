@@ -22,8 +22,8 @@ export function fillMatrix(obj) {
   console.log(obj.minesArr);
   const n = +obj.difficulty;
   for (let b = 0; b < obj.minesArr.length; b += 1) {
-    const i = obj.minesArr[b] % n;
-    const j = (obj.minesArr[b] - i) / n;
+    let i = obj.minesArr[b] % n;
+    let j = (obj.minesArr[b] - i) / n;
     console.log(`j = ${j} i = ${i}`);
     obj.matrix[j].splice(i, 1, 'b');
     fillNums(obj.matrix, i, j);

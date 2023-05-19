@@ -69,7 +69,7 @@ function clickCell() {
         putFlag(evt, index);
       } else {
         countClicks(evt, index);
-        openCell(evt, index, currState.minesArr);
+        openCell(evt, index, currState.matrix, currState.cellsArr);
       }
     });
     cell.addEventListener('contextmenu', (evt) => {
