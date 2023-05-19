@@ -225,4 +225,16 @@ export function generateCells(obj) {
     cell.classList.add('cell');
     cellContainer.appendChild(cell);
   }
+
+//   return generateZeroMatrix(+obj.difficulty);
+}
+
+export function generateZeroMatrix(obj, n) {
+  const matrixJ = [];
+  for (let j = 0; j < n; j += 1) {
+    const arr = [];
+    arr.length = n;
+    matrixJ.push(arr);
+  }
+  obj.matrix = matrixJ;
 }

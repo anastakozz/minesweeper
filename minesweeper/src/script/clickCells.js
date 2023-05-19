@@ -1,8 +1,21 @@
-export function openCell(evt, index) {
-  if (!evt.currentTarget.classList.contains('cell-flag')) {
+export function openCell(evt, index, arr) {
+  const cellClicked = evt.currentTarget;
+  if (cellClicked.classList.contains('cell-flag')) {
+    return null;
+  } if (arr.includes(index)) {
+    cellClicked.classList.add('cell-bomb');
+    alert('GAME OVER');
+    // gameOver()
+  } else {
     evt.currentTarget.classList.add('cell-open');
     console.log(`cell opened on index ${index}`);
   }
+
+  //   if (!evt.currentTarget.classList.contains('cell-flag')) {
+  //     evt.currentTarget.classList.add('cell-open');
+  //     console.log(`cell opened on index ${index}`);
+  //   }
+  return true;
 }
 
 export function putFlag(evt, index) {

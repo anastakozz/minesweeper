@@ -1,29 +1,28 @@
-//TODO:
+// TODO:
 // implement startTimer()
 // implement generateBombs()
 // implement remainings bombs count
 
-
 import './style.css';
-import {generateLayout} from './script/generateHtml';
-import { generateCells } from './script/generateHtml';
-import { openCell } from './script/clickCells';
-import { putFlag } from './script/clickCells';
-import { generateMinesArr } from './script/generateMines';
+import { generateLayout, generateCells, generateZeroMatrix } from './script/generateHtml';
+import { openCell, putFlag } from './script/clickCells';
+import { generateMinesArr, fillMatrix } from './script/generateMines';
 
-const currentState = {
+const currState = {
   difficulty: '10',
-  mines: 10,
+  minesCount: 10,
   darkMode: false,
   flagMode: false,
   clicksNum: 0,
   cells: '',
   cellsArr: [],
-  minesArr: []
-}
+  minesArr: [],
+  matrix: [],
+};
 
 generateLayout();
-generateCells(currentState);
+generateCells(currState);
+generateZeroMatrix(currState, +currState.difficulty);
 
 const modeBtn = document.querySelector('.theme-btn');
 const flagBtn = document.querySelector('.flag-btn');
@@ -31,78 +30,74 @@ const inputSize = document.querySelector('.choose-size');
 const newGameBtn = document.querySelector('.new-game-btn');
 const minesNum = document.querySelector('.mines-num');
 
-currentState.cells = document.querySelectorAll('.cell');
-currentState.cellsArr = Array.from(currentState.cells);
-
+currState.cells = document.querySelectorAll('.cell');
+currState.cellsArr = Array.from(currState.cells);
 
 document.addEventListener('contextmenu', (evt) => evt.preventDefault());
 
 modeBtn.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-})
+  document.body.classList.toggle('dark-mode');
+});
 
 flagBtn.addEventListener('click', () => {
-    flagBtn.classList.toggle('flag-active');
-    currentState.flagMode = !currentState.flagMode;
-    console.log(currentState.flagMode);
-})
+  flagBtn.classList.toggle('flag-active');
+  currState.flagMode = !currState.flagMode;
+  console.log(currState.flagMode);
+});
+
+function countClicks(evt, index) {
+  const clickCount = document.querySelector('.clicks-count');
+  if (currState.clicksNum === 0 && !evt.currentTarget.classList.contains('cell-flag')) {
+    console.log('START');
+    currState.clicksNum += 1;
+    // startTimer();
+    currState.minesArr = generateMinesArr(currState.minesCount, +currState.difficulty, index);
+    // console.log(currentState.minesArr);
+    fillMatrix(currState);
+  } else if (!evt.currentTarget.classList.contains('cell-flag')) {
+    currState.clicksNum += 1;
+  }
+  clickCount.textContent = `Cell clicks: ${currState.clicksNum}`;
+}
 
 function clickCell() {
-    let index = null;
-    currentState.cells.forEach((cell) => {
-        cell.addEventListener('click', (evt) => {
-            index = currentState.cellsArr.indexOf(cell);
-            if (currentState.flagMode) {
-                putFlag(evt, index);
-            }else{
-                countClicks(index)
-                openCell(evt, index)
-            }
-        });
-        cell.addEventListener('contextmenu', (evt) => {
-            if(!currentState.flagMode){
-                index = currentState.cellsArr.indexOf(cell);
-                putFlag(evt, index);
-            }
-        })
-    })
+  let index = null;
+  currState.cells.forEach((cell) => {
+    cell.addEventListener('click', (evt) => {
+      index = currState.cellsArr.indexOf(cell);
+      if (currState.flagMode) {
+        putFlag(evt, index);
+      } else {
+        countClicks(evt, index);
+        openCell(evt, index, currState.minesArr);
+      }
+    });
+    cell.addEventListener('contextmenu', (evt) => {
+      if (!currState.flagMode) {
+        index = currState.cellsArr.indexOf(cell);
+        putFlag(evt, index);
+      }
+    });
+  });
 }
-clickCell()
-
-function countClicks(index) {
-    const clickCount = document.querySelector('.clicks-count');
-    if (currentState.clicksNum === 0) {
-        console.log('START');
-        currentState.clicksNum += 1;
-        // startTimer();
-        // generateBombs();
-        generateMinesArr(currentState.mines, index);
-    } else {
-        currentState.clicksNum +=1;
-    }
-    clickCount.textContent = 'Cell clicks: ' + currentState.clicksNum;
-}
+clickCell();
 
 inputSize.addEventListener('change', () => {
-currentState.difficulty = inputSize.value;
-console.log('chosen size: ' + currentState.difficulty);
-})
+  currState.difficulty = inputSize.value;
+  console.log(`chosen size: ${currState.difficulty}`);
+});
 
-newGameBtn.addEventListener('click',()=> {
-    generateCells(currentState);
-    currentState.clicksNum = 0;
-    currentState.cells = document.querySelectorAll('.cell');
-    currentState.cellsArr = Array.from(currentState.cells);
-    clickCell();
-    console.log('check array length: ' + currentState.cellsArr.length);
-})
+newGameBtn.addEventListener('click', () => {
+  generateCells(currState);
+  generateZeroMatrix(currState, +currState.difficulty);
+  currState.clicksNum = 0;
+  currState.cells = document.querySelectorAll('.cell');
+  currState.cellsArr = Array.from(currState.cells);
+  clickCell();
+  console.log(`check array length: ${currState.cellsArr.length}`);
+});
 
 minesNum.addEventListener('change', () => {
-    currentState.mines = +minesNum.value;
-    console.log(currentState.mines);
-})
-
-
-
-
-
+  currState.minesCount = +minesNum.value;
+  console.log(currState.minesCount);
+});
