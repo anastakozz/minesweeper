@@ -52,10 +52,6 @@ for (let n = j - 1; n <= j + 1; n += 1) {
         matrix[n].splice(i-1, 1, matrix[n][i-1] + 1);
     }
  }
- 
-  
-    
 }
 
-  
 }

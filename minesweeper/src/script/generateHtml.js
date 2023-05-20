@@ -39,6 +39,8 @@ let titleNum;
 let titleDate;
 let titleTime;
 let titleClicks;
+let popupMsg;
+let popup;
 
 export function generateLayout() {
   main = document.createElement('main');
@@ -59,6 +61,25 @@ export function generateLayout() {
   game = document.createElement('div');
   game.classList.add('game');
   wrapper.appendChild(game);
+
+
+  popup = document.createElement('div');
+  popup.classList.add('popup-background', 'hidden');
+  main.appendChild(popup);
+
+  popupMsg = document.createElement('div');
+  popupMsg.classList.add('popup-msg');
+  popup.appendChild(popupMsg);
+  
+  const popupTitle = document.createElement('h3');
+  popupTitle.classList.add('popup-title');
+  popupMsg.appendChild(popupTitle);
+  popupTitle.textContent = 'Hooray!';
+
+  const popupText = document.createElement('p');
+  popupText.classList.add('popup-text');
+  popupMsg.appendChild(popupText);
+  popupText.textContent = 'You found all mines in ## seconds and N moves!';
 
   // SETUP
   gameSetup = document.createElement('div');
@@ -200,7 +221,7 @@ export function generateLayout() {
 }
 
 export function generateCells(obj) {
-  flagCount.textContent = 'Flags put: 0';
+  flagCount.textContent = `Flags put: 0 / Mines left: ${obj.minesCount}`;
   clicksCount.textContent = 'Cell clicks: 0';
   cellContainer.innerHTML = '';
   cellContainer.classList.remove('easy', 'medium', 'hard');

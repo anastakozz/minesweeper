@@ -1,24 +1,72 @@
 
 body {
   font-family: 'Chakra Petch', sans-serif;
-  width: 100%;
-  background-color: white;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+margin: 0;
+}
+
+.main-title {
+    display: block;
 }
 
 .dark-mode {
     filter: invert(90%);
-    background-color: rgba(0, 0, 0, 0.85);
+    /* background-color: rgba(0, 0, 0, 0.85); */
 }
 
 .wrapper {
   margin: auto;
-  width: 100%;
+  max-width: 100%;
   text-align: center;
 }
 
+.popup-background {
+    margin: 0;
+    top: 0;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.popup-msg {
+  width: 450px;
+  height: 220px;
+  text-align: center;
+  border: 1px dashed black;
+  background-image: url(./assets/bomb.png);
+  background-size: 20%;
+  background-repeat: no-repeat;
+  background-position:center bottom 15%;
+  background-color: white
+}
+
+.hidden {
+    display: none;
+}
+
+.gameover {
+color: red;
+}
+
+.win {
+color: green;
+}
+
 .game {
+    width: fit-content;
+    min-width: 40%;
     margin: auto;
-    width: 60%;
+    /* max-width: 60%; */
     border: 1px dashed black;
 }
 
@@ -51,7 +99,6 @@ body {
   font-weight: 700;
   background-color: transparent;
 }
-
 
 
 .mines-num-div::before {
@@ -88,6 +135,10 @@ body {
     width: 75px;
     height: 25px;
     font-family: 'Chakra Petch', sans-serif;
+}
+
+.changed {
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 .new-game-btn {
@@ -138,10 +189,10 @@ body {
 }
 
 .game-field {
+    box-sizing: border-box;
     position: relative;
     justify-content: center;
-    padding-top: 60px;
-    padding-bottom: 60px;
+    padding: 60px 20px;
 }
 
 .flag-count {
@@ -155,7 +206,8 @@ body {
 .clicks-count {
     z-index: 1;
     position: absolute;
-    top: 15px;
+    top: 30px;
+    left: 5%;
     font-size: 10px;
 }
 
@@ -181,14 +233,13 @@ body {
 }
 
 .flag-active {
-    background-color: rgba(0, 0, 0, 0.1) ;
+    background-color: rgba(0, 0, 0, 0.2) ;
 }
 
 
-
 .cell-container {
-  display: grid;
-  gap: 3px;
+  display:grid;
+  gap: 2.5px;
 }
 
 .easy {
@@ -286,13 +337,15 @@ body {
 
 @media (max-width: 1280px) {
   .game {
-  width: 80%;
+    min-width: 60%;
+  /* max-width: 80%; */
   }
 }
 
 @media (max-width: 768px) {
     .game {
-    width: 90%;
+        min-width: 80%;
+    /* max-width: 95%; */
     }
 
     .cell-container {
