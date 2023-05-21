@@ -1,41 +1,38 @@
-
 let t;
 let sec;
 let min;
 let printSec;
 
 export function startStopTimer(timeOn) {
-const timer = document.querySelector('.timer');
+  const timer = document.querySelector('.timer');
 
-
-function tick() {
+  function tick() {
     sec += 1;
-    if (sec >= 60){
-        sec = 0;
-        min += 1;
+    if (sec >= 60) {
+      sec = 0;
+      min += 1;
     }
-    printSec = sec.toString().padStart(2,'0');
+    printSec = sec.toString().padStart(2, '0');
     timer.textContent = `${min}:${printSec}`;
-}
-function start(){
-   t = setInterval(tick, 1000);
-}
+  }
+  function start() {
+    t = setInterval(tick, 1000);
+  }
 
-function stop(){
+  function stop() {
     clearInterval(t);
-}
+  }
 
-if (timeOn) {
+  if (timeOn) {
     sec = 0;
     min = 0;
     start();
-} else {
+  } else {
     stop();
-    let result = (min * 60 + sec);
+    const result = (min * 60 + sec);
     timer.textContent = '0:00';
     return (result);
-}
-
+  }
 }
 
 // export function stopTimer() {

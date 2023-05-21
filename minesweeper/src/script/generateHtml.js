@@ -63,7 +63,6 @@ export function generateLayout() {
   game.classList.add('game');
   wrapper.appendChild(game);
 
-
   popup = document.createElement('div');
   popup.classList.add('popup-background', 'hidden');
   main.appendChild(popup);
@@ -71,7 +70,7 @@ export function generateLayout() {
   popupMsg = document.createElement('div');
   popupMsg.classList.add('popup-msg');
   popup.appendChild(popupMsg);
-  
+
   const popupTitle = document.createElement('h3');
   popupTitle.classList.add('popup-title');
   popupMsg.appendChild(popupTitle);
@@ -185,14 +184,12 @@ export function generateLayout() {
   statistics.classList.add('statistics');
   statDiv.appendChild(statistics);
 
-
-
   histDate = document.createElement('div');
   histDate.classList.add('history-date');
   statistics.appendChild(histDate);
 
   titleDate = document.createElement('h4');
-  titleDate.classList.add('hist-title','date-hist-title');
+  titleDate.classList.add('hist-title', 'date-hist-title');
   titleDate.textContent = 'date';
   statTitles.appendChild(titleDate);
 

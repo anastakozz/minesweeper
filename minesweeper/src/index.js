@@ -1,5 +1,3 @@
-
-
 import './style.css';
 import { generateLayout, generateCells, generateZeroMatrix } from './script/generateHtml';
 import { openCell, putFlag } from './script/clickCells';
@@ -23,10 +21,9 @@ const currState = {
   timer: {
     sec: 0,
     min: 0,
-    timeOn: false
-  }
+    timeOn: false,
+  },
 };
-
 
 generateLayout();
 generateCells(currState);
@@ -49,7 +46,6 @@ const soundBtn = document.querySelector('.sound-btn');
 currState.cells = document.querySelectorAll('.cell');
 currState.cellsArr = Array.from(currState.cells);
 
-
 function countClicks(evt, index) {
   const clickCount = document.querySelector('.clicks-count');
   if (currState.clicksNum === 0 && !evt.currentTarget.classList.contains('cell-flag')) {
@@ -66,6 +62,59 @@ function countClicks(evt, index) {
   clickCount.textContent = `Cell clicks: ${currState.clicksNum}`;
 }
 
+function gameover() {
+  playAudio('lose', currState.soundOn);
+  popup.classList.toggle('hidden');
+  popupTitle.textContent = 'GAME OVER!';
+  popupText.textContent = 'Try again!';
+  document.body.style.overflow = 'hidden';
+  popup.classList.add('gameover');
+  popup.classList.remove('win');
+}
+
+function writeStats(result) {
+  const num = document.querySelectorAll('.result');
+  if (num.length === 10) {
+    histTime.children[histTime.children.length - 1].remove();
+    histClicks.children[histClicks.children.length - 1].remove();
+    histDate.children[histDate.children.length - 1].remove();
+    histBombs.children[histBombs.children.length - 1].remove();
+  }
+
+  const newTime = document.createElement('div');
+  newTime.classList.add('result', 'hist');
+  newTime.textContent = result;
+  histTime.prepend(newTime);
+
+  const newMoves = document.createElement('div');
+  newMoves.textContent = currState.clicksNum;
+  newMoves.classList.add('hist');
+  histClicks.prepend(newMoves);
+
+  const newDate = document.createElement('div');
+  newDate.textContent = getDateTime();
+  newDate.classList.add('date-hist-title');
+  histDate.prepend(newDate);
+
+  const newBombs = document.createElement('div');
+  newBombs.textContent = currState.minesCount;
+  newBombs.classList.add('hist');
+  histBombs.prepend(newBombs);
+}
+
+function win() {
+  playAudio('win', currState.soundOn);
+  currState.timer.timeOn = false;
+  const result = startStopTimer(currState.timer.timeOn);
+  popup.classList.toggle('hidden');
+  popupTitle.textContent = 'Hooray!';
+  popupText.textContent = `You found all mines in ${result} seconds and ${currState.clicksNum} moves!`;
+  document.body.style.overflow = 'hidden';
+  popup.classList.add('win');
+  popup.classList.remove('gameover');
+  writeStats(result);
+}
+
 function clickCell() {
   let index = null;
   currState.cells.forEach((cell) => {
@@ -76,17 +125,16 @@ function clickCell() {
         putFlag(evt, index, currState.minesCount);
       } else {
         countClicks(evt, index);
-        
-        let result = openCell(evt, index, currState.matrix, currState.cellsArr);
-        let openCells = document.querySelectorAll('.cell-open').length;
-        if (result === 'gameover'){
-            gameover();
-        } else if ( openCells === (Math.pow(+currState.difficulty, 2) - currState.minesCount)){
-            win();
+
+        const result = openCell(evt, index, currState.matrix, currState.cellsArr);
+        const openCells = document.querySelectorAll('.cell-open').length;
+        if (result === 'gameover') {
+          gameover();
+        } else if (openCells === ((+currState.difficulty) ** 2 - currState.minesCount)) {
+          win();
         } else {
           playAudio('open', currState.soundOn);
         }
-        
       }
     });
     cell.addEventListener('contextmenu', (evt) => {
@@ -100,80 +148,24 @@ function clickCell() {
 }
 
 function startGame() {
-    currState.difficulty = inputSize.value;
-    currState.minesCount = +minesNum.value;
-    inputSize.classList.remove('changed');
-    minesNum.classList.remove('changed');
-    generateCells(currState);
-    generateZeroMatrix(currState, +currState.difficulty);
-    currState.clicksNum = 0;
-    currState.cells = document.querySelectorAll('.cell');
-    currState.cellsArr = Array.from(currState.cells);
-    currState.timer.timeOn = false;
-    console.log(currState.timer.timeOn);
-    startStopTimer(currState.timer.timeOn);
-    clickCell();
+  currState.difficulty = inputSize.value;
+  currState.minesCount = +minesNum.value;
+  inputSize.classList.remove('changed');
+  minesNum.classList.remove('changed');
+  generateCells(currState);
+  generateZeroMatrix(currState, +currState.difficulty);
+  currState.clicksNum = 0;
+  currState.cells = document.querySelectorAll('.cell');
+  currState.cellsArr = Array.from(currState.cells);
+  currState.timer.timeOn = false;
+  console.log(currState.timer.timeOn);
+  startStopTimer(currState.timer.timeOn);
+  clickCell();
 }
-
-function gameover() {
-    playAudio('lose', currState.soundOn);
-    popup.classList.toggle('hidden');
-    popupTitle.textContent = 'GAME OVER!';
-    popupText.textContent = 'Try again!';
-    document.body.style.overflow = 'hidden';
-    popup.classList.add('gameover');
-    popup.classList.remove('win');
-}
-
-function win(){
-    playAudio('win', currState.soundOn);
-    currState.timer.timeOn = false;
-    let result = startStopTimer(currState.timer.timeOn);
-    popup.classList.toggle('hidden');
-    popupTitle.textContent = 'Hooray!';
-    popupText.textContent = `You found all mines in ${result} seconds and ${currState.clicksNum} moves!`;
-    document.body.style.overflow = 'hidden';
-    popup.classList.add('win');
-    popup.classList.remove('gameover');
-    writeStats(result);
-}
-
-function writeStats(result) {
-  const num = document.querySelectorAll('.result')
-  if(num.length === 10) {
-    histTime.children[histTime.children.length - 1].remove();
-    histClicks.children[histClicks.children.length - 1].remove();
-    histDate.children[histDate.children.length - 1].remove();
-    histBombs.children[histBombs.children.length - 1].remove();
-  }
-
-  let newTime = document.createElement('div');
-  newTime.classList.add('result', 'hist');
-  newTime.textContent = result;
-  histTime.prepend(newTime);
-
-  let newMoves = document.createElement('div');
-  newMoves.textContent = currState.clicksNum;
-  newMoves.classList.add('hist');
-  histClicks.prepend(newMoves);
-
-  let newDate = document.createElement('div');
-  newDate.textContent = getDateTime();
-  newDate.classList.add('date-hist-title');
-  histDate.prepend(newDate);
-
-  let newBombs = document.createElement('div');
-  newBombs.textContent = currState.minesCount;
-  newBombs.classList.add('hist');
-  histBombs.prepend(newBombs);
-}
-
 
 document.addEventListener('contextmenu', (evt) => evt.preventDefault());
 
-
 clickCell();
-
 
 inputSize.addEventListener('change', () => {
   minesNum.value = inputSize.value;
@@ -182,17 +174,17 @@ inputSize.addEventListener('change', () => {
 });
 
 newGameBtn.addEventListener('click', () => {
-  startGame()
+  startGame();
 });
 
 minesNum.addEventListener('change', () => {
-    minesNum.classList.add('changed');
+  minesNum.classList.add('changed');
 });
 
 popup.addEventListener('click', () => {
-    popup.classList.toggle('hidden');
-    document.body.style.overflow = '';
-    startGame()
+  popup.classList.toggle('hidden');
+  document.body.style.overflow = '';
+  startGame();
 });
 
 modeBtn.addEventListener('click', () => {
@@ -210,4 +202,3 @@ soundBtn.addEventListener('click', () => {
   soundBtn.classList.toggle('sound-on');
   console.log(currState.soundOn);
 });
-
