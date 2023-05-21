@@ -8,6 +8,7 @@ import { generateLayout, generateCells, generateZeroMatrix } from './script/gene
 import { openCell, putFlag } from './script/clickCells';
 import { generateMinesArr, fillMatrix } from './script/generateMines';
 import { startStopTimer } from './script/timer';
+import { getDateTime } from './script/getDate';
 
 const currState = {
   difficulty: '10',
@@ -40,6 +41,9 @@ const minesNum = document.querySelector('.mines-num');
 const popup = document.querySelector('.popup-background');
 const popupTitle = document.querySelector('.popup-title');
 const popupText = document.querySelector('.popup-text');
+const histDate = document.querySelector('.history-date');
+const histTime = document.querySelector('.history-time');
+const histClicks = document.querySelector('.history-clicks');
 
 
 currState.cells = document.querySelectorAll('.cell');
@@ -123,7 +127,31 @@ function win(){
     document.body.style.overflow = 'hidden';
     popup.classList.add('win');
     popup.classList.remove('gameover');
+    writeStats(result);
 }
+
+function writeStats(result) {
+  const num = document.querySelectorAll('.result')
+  if(num.length === 10) {
+    histTime.children[histTime.children.length - 1].remove();
+    histClicks.children[histClicks.children.length - 1].remove();
+    histDate.children[histDate.children.length - 1].remove();
+  }
+
+  let newTime = document.createElement('div');
+  newTime.classList.add('result');
+  newTime.textContent = result;
+  histTime.prepend(newTime);
+
+  let newMoves = document.createElement('div');
+  newMoves.textContent = currState.clicksNum;
+  histClicks.prepend(newMoves);
+
+  let newDate = document.createElement('div');
+  newDate.textContent = getDateTime();
+  histDate.prepend(newDate);
+}
+
 
 document.addEventListener('contextmenu', (evt) => evt.preventDefault());
 

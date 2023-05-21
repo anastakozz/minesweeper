@@ -41,6 +41,7 @@ let titleTime;
 let titleClicks;
 let popupMsg;
 let popup;
+let statTitles;
 
 export function generateLayout() {
   main = document.createElement('main');
@@ -174,19 +175,24 @@ export function generateLayout() {
   statTitle = document.createElement('h3');
   statTitle.classList.add('stat-title');
   statDiv.appendChild(statTitle);
+  statTitle.textContent = 'Statistics';
+
+  statTitles = document.createElement('div');
+  statTitles.classList.add('statistics');
+  statDiv.appendChild(statTitles);
 
   statistics = document.createElement('div');
   statistics.classList.add('statistics');
   statDiv.appendChild(statistics);
 
-  histNum = document.createElement('div');
-  histNum.classList.add('history-num');
-  statistics.appendChild(histNum);
+//   histNum = document.createElement('div');
+//   histNum.classList.add('history-num');
+//   statistics.appendChild(histNum);
 
-  titleNum = document.createElement('h4');
-  titleNum.classList.add('hist-title');
-  titleNum.textContent = 'num';
-  histNum.appendChild(titleNum);
+//   titleNum = document.createElement('h4');
+//   titleNum.classList.add('hist-title');
+//   titleNum.textContent = 'num';
+//   histNum.appendChild(titleNum);
 
   histDate = document.createElement('div');
   histDate.classList.add('history-date');
@@ -195,16 +201,16 @@ export function generateLayout() {
   titleDate = document.createElement('h4');
   titleDate.classList.add('hist-title');
   titleDate.textContent = 'date';
-  histDate.appendChild(titleDate);
+  statTitles.appendChild(titleDate);
 
   histTime = document.createElement('div');
   histTime.classList.add('history-time');
   statistics.appendChild(histTime);
 
   titleTime = document.createElement('h4');
-  titleTime.classList.add('hist-title');
+  titleTime.classList.add('hist-title', 'time-hist-title');
   titleTime.textContent = 'time';
-  histTime.appendChild(titleTime);
+  statTitles.appendChild(titleTime);
 
   histClicks = document.createElement('div');
   histClicks.classList.add('history-clicks');
@@ -213,7 +219,7 @@ export function generateLayout() {
   titleClicks = document.createElement('h4');
   titleClicks.classList.add('hist-title');
   titleClicks.textContent = 'clicks';
-  histClicks.appendChild(titleClicks);
+  statTitles.appendChild(titleClicks);
 
   // FINAL APPEND
   document.body.appendChild(main);

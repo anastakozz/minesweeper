@@ -318,8 +318,8 @@ color: green;
 
 
 .statistics-div {
+    display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .stat-title {
@@ -327,11 +327,24 @@ color: green;
 }
 
 .hist-title {
-    margin-top: 5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    vertical-align: top;
 }
 
 .statistics {
+    padding: 5px 5%;
+    padding-bottom: 10px;
     border-bottom: none;
+    display: flex;
+}
+
+.history-time,
+.time-hist-title {
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
 }
 
 
