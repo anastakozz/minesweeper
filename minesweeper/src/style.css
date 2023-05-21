@@ -63,20 +63,19 @@ color: green;
 }
 
 .game {
-    width: fit-content;
-    min-width: 40%;
-    margin: auto;
-    /* max-width: 60%; */
-    border: 1px dashed black;
+  width: fit-content;
+  min-width: 40%;
+  margin: auto;
+  border: 1px dashed black;
 }
 
 .game-head,
 .game-setup,
 .game-field,
 .statistics {
-    min-height: 30px;
-    display: flex;
-    justify-content: space-between;
+  min-height: 30px;
+  display: flex;
+  justify-content: space-between;
     align-items: center;
     border-bottom: 1px dashed black;
     padding: 15px 5%;
@@ -327,9 +326,11 @@ color: green;
 }
 
 .hist-title {
+    width: 55px;
     margin-top: 10px;
     margin-bottom: 5px;
     vertical-align: top;
+    /* text-align: left; */
 }
 
 .statistics {
@@ -339,13 +340,21 @@ color: green;
     display: flex;
 }
 
-.history-time,
+.date-hist-title {
+    width: 100px
+}
+
+.hist{
+    width: 55px;
+}
+
+/* .history-time,
 .time-hist-title {
     position: absolute;
     margin: auto;
     left: 0;
     right: 0;
-}
+} */
 
 
 @media (max-width: 1280px) {

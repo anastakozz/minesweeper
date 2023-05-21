@@ -3,7 +3,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
-
+const CopyPlugin = require("copy-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -23,6 +23,11 @@ const config = {
         host: 'localhost',
     },
     plugins: [
+        new CopyPlugin({
+            patterns: [
+              {from: path.resolve(__dirname, 'src', 'assets', 'audio')}
+            ],
+          }),
         new HtmlWebpackPlugin({
             template: 'index.html',
         }),
@@ -61,5 +66,6 @@ module.exports = () => {
     } else {
         config.mode = 'development';
     }
+    
     return config;
 };

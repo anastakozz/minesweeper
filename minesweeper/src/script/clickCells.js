@@ -27,7 +27,7 @@ export function putFlag(evt, index, mines) {
 
 function checkCell(matrix, arr, i, j){
 let ind = j * matrix.length + i;
-if (!arr[ind].classList.contains('cell-open')){
+if (!arr[ind].classList.contains('cell-open') && !arr[ind].classList.contains('cell-flag')){
    if (matrix[j][i] && matrix[j][i] !== 'b'){
     arr[ind].classList.add('cell-open', `cell-${matrix[j][i]}`);
     arr[ind].textContent = matrix[j][i];

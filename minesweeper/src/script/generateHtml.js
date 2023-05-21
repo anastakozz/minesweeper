@@ -185,30 +185,32 @@ export function generateLayout() {
   statistics.classList.add('statistics');
   statDiv.appendChild(statistics);
 
-//   histNum = document.createElement('div');
-//   histNum.classList.add('history-num');
-//   statistics.appendChild(histNum);
 
-//   titleNum = document.createElement('h4');
-//   titleNum.classList.add('hist-title');
-//   titleNum.textContent = 'num';
-//   histNum.appendChild(titleNum);
 
   histDate = document.createElement('div');
   histDate.classList.add('history-date');
   statistics.appendChild(histDate);
 
   titleDate = document.createElement('h4');
-  titleDate.classList.add('hist-title');
+  titleDate.classList.add('hist-title','date-hist-title');
   titleDate.textContent = 'date';
   statTitles.appendChild(titleDate);
+
+  histNum = document.createElement('div');
+  histNum.classList.add('history-num');
+  statistics.appendChild(histNum);
+
+  titleNum = document.createElement('h4');
+  titleNum.classList.add('hist-title');
+  titleNum.textContent = 'bombs';
+  statTitles.appendChild(titleNum);
 
   histTime = document.createElement('div');
   histTime.classList.add('history-time');
   statistics.appendChild(histTime);
 
   titleTime = document.createElement('h4');
-  titleTime.classList.add('hist-title', 'time-hist-title');
+  titleTime.classList.add('hist-title');
   titleTime.textContent = 'time';
   statTitles.appendChild(titleTime);
 

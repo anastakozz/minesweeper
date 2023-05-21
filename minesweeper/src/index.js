@@ -1,7 +1,4 @@
-// TODO:
-// implement startTimer()
-// implement generateBombs()
-// implement remainings bombs count
+
 
 import './style.css';
 import { generateLayout, generateCells, generateZeroMatrix } from './script/generateHtml';
@@ -9,6 +6,7 @@ import { openCell, putFlag } from './script/clickCells';
 import { generateMinesArr, fillMatrix } from './script/generateMines';
 import { startStopTimer } from './script/timer';
 import { getDateTime } from './script/getDate';
+import { playAudio } from './script/playSounds';
 
 const currState = {
   difficulty: '10',
@@ -20,6 +18,7 @@ const currState = {
   cellsArr: [],
   minesArr: [],
   matrix: [],
+  soundOn: false,
 
   timer: {
     sec: 0,
@@ -44,7 +43,8 @@ const popupText = document.querySelector('.popup-text');
 const histDate = document.querySelector('.history-date');
 const histTime = document.querySelector('.history-time');
 const histClicks = document.querySelector('.history-clicks');
-
+const histBombs = document.querySelector('.history-num');
+const soundBtn = document.querySelector('.sound-btn');
 
 currState.cells = document.querySelectorAll('.cell');
 currState.cellsArr = Array.from(currState.cells);
@@ -72,21 +72,27 @@ function clickCell() {
     cell.addEventListener('click', (evt) => {
       index = currState.cellsArr.indexOf(cell);
       if (currState.flagMode) {
+        playAudio('flag', currState.soundOn);
         putFlag(evt, index, currState.minesCount);
       } else {
         countClicks(evt, index);
+        
         let result = openCell(evt, index, currState.matrix, currState.cellsArr);
         let openCells = document.querySelectorAll('.cell-open').length;
         if (result === 'gameover'){
             gameover();
         } else if ( openCells === (Math.pow(+currState.difficulty, 2) - currState.minesCount)){
             win();
+        } else {
+          playAudio('open', currState.soundOn);
         }
+        
       }
     });
     cell.addEventListener('contextmenu', (evt) => {
       if (!currState.flagMode) {
         index = currState.cellsArr.indexOf(cell);
+        playAudio('flag', currState.soundOn);
         putFlag(evt, index, currState.minesCount);
       }
     });
@@ -110,6 +116,7 @@ function startGame() {
 }
 
 function gameover() {
+    playAudio('lose', currState.soundOn);
     popup.classList.toggle('hidden');
     popupTitle.textContent = 'GAME OVER!';
     popupText.textContent = 'Try again!';
@@ -119,6 +126,7 @@ function gameover() {
 }
 
 function win(){
+    playAudio('win', currState.soundOn);
     currState.timer.timeOn = false;
     let result = startStopTimer(currState.timer.timeOn);
     popup.classList.toggle('hidden');
@@ -136,20 +144,28 @@ function writeStats(result) {
     histTime.children[histTime.children.length - 1].remove();
     histClicks.children[histClicks.children.length - 1].remove();
     histDate.children[histDate.children.length - 1].remove();
+    histBombs.children[histBombs.children.length - 1].remove();
   }
 
   let newTime = document.createElement('div');
-  newTime.classList.add('result');
+  newTime.classList.add('result', 'hist');
   newTime.textContent = result;
   histTime.prepend(newTime);
 
   let newMoves = document.createElement('div');
   newMoves.textContent = currState.clicksNum;
+  newMoves.classList.add('hist');
   histClicks.prepend(newMoves);
 
   let newDate = document.createElement('div');
   newDate.textContent = getDateTime();
+  newDate.classList.add('date-hist-title');
   histDate.prepend(newDate);
+
+  let newBombs = document.createElement('div');
+  newBombs.textContent = currState.minesCount;
+  newBombs.classList.add('hist');
+  histBombs.prepend(newBombs);
 }
 
 
@@ -187,5 +203,11 @@ flagBtn.addEventListener('click', () => {
   flagBtn.classList.toggle('flag-active');
   currState.flagMode = !currState.flagMode;
   console.log(currState.flagMode);
+});
+
+soundBtn.addEventListener('click', () => {
+  currState.soundOn = !currState.soundOn;
+  soundBtn.classList.toggle('sound-on');
+  console.log(currState.soundOn);
 });
 
