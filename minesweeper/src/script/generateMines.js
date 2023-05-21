@@ -24,11 +24,11 @@ export function fillMatrix(obj) {
   for (let b = 0; b < obj.minesArr.length; b += 1) {
     const i = obj.minesArr[b] % n;
     const j = (obj.minesArr[b] - i) / n;
-    console.log(`j = ${j} i = ${i}`);
+    // console.log(`j = ${j} i = ${i}`);
     obj.matrix[j].splice(i, 1, 'b');
     fillNums(obj.matrix, i, j);
   }
-  console.log(obj.matrix);
+  // console.log(obj.matrix);
 }
 
 function fillNums(matrix, i, j) {

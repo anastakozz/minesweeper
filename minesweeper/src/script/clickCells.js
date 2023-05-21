@@ -74,7 +74,7 @@ export function openCell(evt, index, matrix, arr) {
     return 'gameover';
   }
   checkCell(matrix, arr, i, j);
-  console.log(`cell opened on index ${index}`);
+  // console.log(`cell opened on index ${index}`);
   return true;
 }
 

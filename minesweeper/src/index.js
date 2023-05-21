@@ -6,6 +6,28 @@ import { startStopTimer } from './script/timer';
 import { getDateTime } from './script/getDate';
 import { playAudio } from './script/playSounds';
 
+
+// const defaultState = {
+//   difficulty: '10',
+//   minesCount: 10,
+//   darkMode: false,
+//   flagMode: false,
+//   clicksNum: 0,
+//   cells: '',
+//   cellsArr: [],
+//   minesArr: [],
+//   matrix: [],
+//   soundOn: false,
+//   saved: false,
+//   stat: '',
+
+//   timer: {
+//     sec: 0,
+//     min: 0,
+//     timeOn: false,
+//   },
+// };
+
 const currState = {
   difficulty: '10',
   minesCount: 10,
@@ -17,6 +39,8 @@ const currState = {
   minesArr: [],
   matrix: [],
   soundOn: false,
+  saved: false,
+  stat: '',
 
   timer: {
     sec: 0,
@@ -26,8 +50,6 @@ const currState = {
 };
 
 generateLayout();
-generateCells(currState);
-generateZeroMatrix(currState, +currState.difficulty);
 
 const modeBtn = document.querySelector('.theme-btn');
 const flagBtn = document.querySelector('.flag-btn');
@@ -43,8 +65,16 @@ const histClicks = document.querySelector('.history-clicks');
 const histBombs = document.querySelector('.history-num');
 const soundBtn = document.querySelector('.sound-btn');
 
-currState.cells = document.querySelectorAll('.cell');
-currState.cellsArr = Array.from(currState.cells);
+if (!currState.saved){
+  generateCells(currState);
+  generateZeroMatrix(currState, +currState.difficulty);
+  currState.cells = document.querySelectorAll('.cell');
+  currState.cellsArr = Array.from(currState.cells);
+  console.log('new')
+} else {
+  console.log('saved')
+}
+
 
 function countClicks(evt, index) {
   const clickCount = document.querySelector('.clicks-count');
@@ -52,7 +82,6 @@ function countClicks(evt, index) {
     console.log('START');
     currState.clicksNum += 1;
     currState.timer.timeOn = true;
-    console.log(currState.timer.timeOn);
     startStopTimer(currState.timer.timeOn);
     currState.minesArr = generateMinesArr(currState.minesCount, +currState.difficulty, index);
     fillMatrix(currState);
@@ -163,6 +192,24 @@ function startGame() {
   clickCell();
 }
 
+// function setLocalStorage() {
+//   currState.saved = !currState.saved;
+//   currState.stat = document.querySelector('.statistics');
+//   // localStorage.setItem('difficulty', currState.difficulty);
+//   // localStorage.setItem('minesCount', currState.minesCount);
+//   localStorage.setItem('darkMode', currState.darkMode);
+//   localStorage.setItem('stat', currState.stat );
+//   localStorage.setItem('saved', currState.saved );
+// }
+
+// function getLocalStorage() {
+//   currState.darkMode = localStorage.getItem('darkMode');
+//   currState.stat = localStorage.getItem('stat');
+//   currState.saved = localStorage.getItem('saved');
+// }
+
+// window.addEventListener('beforeunload', setLocalStorage);
+// window.addEventListener('load', getLocalStorage);
 document.addEventListener('contextmenu', (evt) => evt.preventDefault());
 
 clickCell();
