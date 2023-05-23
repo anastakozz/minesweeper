@@ -16,19 +16,15 @@ export function playAudio(sound, state) {
     switch (sound) {
       case 'win':
         audioWin.play();
-        console.log('audio played');
         break;
       case 'lose':
         audioLose.play();
-        console.log('audio played');
         break;
       case 'open':
         audioOpen.play();
-        console.log('audio played');
         break;
       case 'flag':
         audioFlag.play();
-        console.log('audio played');
         break;
     }
   }

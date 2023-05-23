@@ -181,7 +181,7 @@ export function generateLayout() {
   statDiv.appendChild(statTitles);
 
   statistics = document.createElement('div');
-  statistics.classList.add('statistics');
+  statistics.classList.add('statistics', 'saved-stat');
   statDiv.appendChild(statistics);
 
   histDate = document.createElement('div');

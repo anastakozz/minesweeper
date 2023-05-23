@@ -81,7 +81,7 @@ export function openCell(evt, index, matrix, arr) {
 export function putFlag(evt, index, mines) {
   if (!evt.currentTarget.classList.contains('cell-open')) {
     evt.currentTarget.classList.toggle('cell-flag');
-    console.log(`flag toggled on index ${index}`);
+    // console.log(`flag toggled on index ${index}`);
   }
   const flagCount = document.querySelector('.flag-count');
   const flaggedCells = document.querySelectorAll('.cell-flag');

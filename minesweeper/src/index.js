@@ -6,27 +6,7 @@ import { startStopTimer } from './script/timer';
 import { getDateTime } from './script/getDate';
 import { playAudio } from './script/playSounds';
 
-
-// const defaultState = {
-//   difficulty: '10',
-//   minesCount: 10,
-//   darkMode: false,
-//   flagMode: false,
-//   clicksNum: 0,
-//   cells: '',
-//   cellsArr: [],
-//   minesArr: [],
-//   matrix: [],
-//   soundOn: false,
-//   saved: false,
-//   stat: '',
-
-//   timer: {
-//     sec: 0,
-//     min: 0,
-//     timeOn: false,
-//   },
-// };
+let stat;
 
 const currState = {
   difficulty: '10',
@@ -39,8 +19,6 @@ const currState = {
   minesArr: [],
   matrix: [],
   soundOn: false,
-  saved: false,
-  stat: '',
 
   timer: {
     sec: 0,
@@ -50,6 +28,10 @@ const currState = {
 };
 
 generateLayout();
+
+if(localStorage.getItem('stat')){
+  document.querySelector('.saved-stat').innerHTML = localStorage.getItem('stat');
+}
 
 const modeBtn = document.querySelector('.theme-btn');
 const flagBtn = document.querySelector('.flag-btn');
@@ -65,15 +47,11 @@ const histClicks = document.querySelector('.history-clicks');
 const histBombs = document.querySelector('.history-num');
 const soundBtn = document.querySelector('.sound-btn');
 
-if (!currState.saved){
-  generateCells(currState);
-  generateZeroMatrix(currState, +currState.difficulty);
-  currState.cells = document.querySelectorAll('.cell');
-  currState.cellsArr = Array.from(currState.cells);
-  console.log('new')
-} else {
-  console.log('saved')
-}
+
+generateCells(currState);
+generateZeroMatrix(currState, +currState.difficulty);
+currState.cells = document.querySelectorAll('.cell');
+currState.cellsArr = Array.from(currState.cells);
 
 
 function countClicks(evt, index) {
@@ -187,29 +165,18 @@ function startGame() {
   currState.cells = document.querySelectorAll('.cell');
   currState.cellsArr = Array.from(currState.cells);
   currState.timer.timeOn = false;
-  console.log(currState.timer.timeOn);
+  // console.log(currState.timer.timeOn);
   startStopTimer(currState.timer.timeOn);
   clickCell();
 }
+function setLocalStorage() {
+  stat = document.querySelector('.saved-stat').innerHTML;
+  localStorage.setItem('stat', stat );
+}
 
-// function setLocalStorage() {
-//   currState.saved = !currState.saved;
-//   currState.stat = document.querySelector('.statistics');
-//   // localStorage.setItem('difficulty', currState.difficulty);
-//   // localStorage.setItem('minesCount', currState.minesCount);
-//   localStorage.setItem('darkMode', currState.darkMode);
-//   localStorage.setItem('stat', currState.stat );
-//   localStorage.setItem('saved', currState.saved );
-// }
 
-// function getLocalStorage() {
-//   currState.darkMode = localStorage.getItem('darkMode');
-//   currState.stat = localStorage.getItem('stat');
-//   currState.saved = localStorage.getItem('saved');
-// }
 
-// window.addEventListener('beforeunload', setLocalStorage);
-// window.addEventListener('load', getLocalStorage);
+window.addEventListener('beforeunload', setLocalStorage);
 document.addEventListener('contextmenu', (evt) => evt.preventDefault());
 
 clickCell();
@@ -241,7 +208,7 @@ modeBtn.addEventListener('click', () => {
 flagBtn.addEventListener('click', () => {
   flagBtn.classList.toggle('flag-active');
   currState.flagMode = !currState.flagMode;
-  console.log(currState.flagMode);
+  // console.log(currState.flagMode);
 });
 
 soundBtn.addEventListener('click', () => {

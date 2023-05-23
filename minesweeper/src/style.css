@@ -318,6 +318,7 @@ color: green;
 
 
 .statistics-div {
+    padding-bottom: 15px;
     display: flex;
     flex-direction: column;
 }
@@ -338,7 +339,7 @@ color: green;
     padding: 0 5%;
     border-bottom: none;
     display: flex;
-    font-size: 15px;
+    font-size: 12px;
 }
 
 .date-hist-title {

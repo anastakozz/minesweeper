@@ -19,7 +19,7 @@ export function generateMinesArr(num, size, firstIndex) {
 }
 
 export function fillMatrix(obj) {
-  console.log(obj.minesArr);
+  // console.log(obj.minesArr);
   const n = +obj.difficulty;
   for (let b = 0; b < obj.minesArr.length; b += 1) {
     const i = obj.minesArr[b] % n;
