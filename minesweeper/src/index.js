@@ -86,6 +86,7 @@ function writeStats(result) {
     histClicks.children[histClicks.children.length - 1].remove();
     histDate.children[histDate.children.length - 1].remove();
     histBombs.children[histBombs.children.length - 1].remove();
+    setLocalStorage()
   }
 
   const newTime = document.createElement('div');
@@ -176,7 +177,7 @@ function setLocalStorage() {
 
 
 
-window.addEventListener('beforeunload', setLocalStorage);
+// window.addEventListener('beforeunload', setLocalStorage);
 document.addEventListener('contextmenu', (evt) => evt.preventDefault());
 
 clickCell();
