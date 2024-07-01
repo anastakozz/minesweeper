@@ -4,10 +4,13 @@
 
 Author: Anastasiya Kozlova (shvedagon@gmail.com / Telegram:  @N_Kozz)
 
-Task: https://github.com/rolling-scopes-school/tasks/blob/master/tasks/minesweeper/README.md
+Task: [link](https://github.com/rolling-scopes-school/tasks/blob/master/tasks/minesweeper/README.md)
 
 Main goals: 
 - implement working game using only native Javascript
+
+<img width="628" alt="Screenshot 2024-07-01 at 13 34 35" src="https://github.com/anastakozz/minesweeper/assets/117598324/a2767b3b-7ad0-4ade-b6dc-0bc16fac79f1">
+
 
 #### Score: 180/180
 
