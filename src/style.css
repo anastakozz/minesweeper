@@ -1,13 +1,12 @@
-
 body {
-  font-family: 'Chakra Petch', sans-serif;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
+    font-family: 'Chakra Petch', sans-serif;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 main {
-margin: 0;
+    margin: 0;
 }
 
 .main-title {
@@ -21,9 +20,9 @@ margin: 0;
 }
 
 .wrapper {
-  margin: auto;
-  max-width: 100%;
-  text-align: center;
+    margin: auto;
+    max-width: 100%;
+    text-align: center;
 }
 
 .popup-background {
@@ -40,15 +39,15 @@ margin: 0;
 }
 
 .popup-msg {
-  width: 450px;
-  height: 220px;
-  text-align: center;
-  border: 1px dashed black;
-  background-image: url(./assets/bomb.png);
-  background-size: 20%;
-  background-repeat: no-repeat;
-  background-position:center bottom 15%;
-  background-color: white
+    width: 450px;
+    height: 220px;
+    text-align: center;
+    border: 1px dashed black;
+    background-image: url(./assets/bomb.png);
+    background-size: 20%;
+    background-repeat: no-repeat;
+    background-position: center bottom 15%;
+    background-color: white
 }
 
 .hidden {
@@ -56,27 +55,27 @@ margin: 0;
 }
 
 .gameover {
-color: red;
+    color: red;
 }
 
 .win {
-color: green;
+    color: green;
 }
 
 .game {
-  width: fit-content;
-  min-width: 40%;
-  margin: auto;
-  border: 1px dashed black;
+    width: fit-content;
+    min-width: 40%;
+    margin: auto;
+    border: 1px dashed black;
 }
 
 .game-head,
 .game-setup,
 .game-field,
 .statistics {
-  min-height: 30px;
-  display: flex;
-  justify-content: space-between;
+    min-height: 30px;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 1px dashed black;
     padding: 15px 5%;
@@ -84,20 +83,20 @@ color: green;
 
 .mines-num,
 .timer {
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  border: 1px dashed black;
-  width: 50px;
-  height: 25px;
-  color:coral;
-  font-family: 'Chakra Petch', sans-serif;
-  font-size: 16px;
-  text-align: center;
-  padding: 0;
-  font-weight: 700;
-  background-color: transparent;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border: 1px dashed black;
+    width: 50px;
+    height: 25px;
+    color: coral;
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 16px;
+    text-align: center;
+    padding: 0;
+    font-weight: 700;
+    background-color: transparent;
 }
 
 
@@ -116,6 +115,7 @@ color: green;
 .timer-div {
     display: flex;
 }
+
 .timer-div::after {
     padding-left: 5px;
     content: '';
@@ -229,21 +229,21 @@ color: green;
 }
 
 .flag-btn:hover {
-  border-color: red;
+    border-color: red;
 }
 
 .flag-active {
-    background-color: rgba(0, 0, 0, 0.2) ;
+    background-color: rgba(0, 0, 0, 0.2);
 }
 
 
 .cell-container {
-  display:grid;
-  gap: 2.5px;
+    display: grid;
+    gap: 2.5px;
 }
 
 .easy {
-  grid-template-columns: repeat(10, 1fr);    
+    grid-template-columns: repeat(10, 1fr);
 }
 
 .medium {
@@ -261,6 +261,7 @@ color: green;
     height: 20px;
     background-color: rgba(0, 0, 0, 0.25);
 }
+
 .cell-open {
     background-color: rgba(0, 0, 0, 0.1);
 }
@@ -286,12 +287,15 @@ color: green;
 .cell-1 {
     color: blue;
 }
+
 .cell-2 {
     color: green;
-} 
+}
+
 .cell-3 {
     color: red;
 }
+
 .cell-4 {
     color: blueviolet;
 }
@@ -346,7 +350,7 @@ color: green;
     width: 100px
 }
 
-.hist{
+.hist {
     width: 55px;
 }
 
@@ -360,32 +364,31 @@ color: green;
 
 
 @media (max-width: 1280px) {
-  .game {
-    min-width: 60%;
-  /* max-width: 80%; */
-  }
+    .game {
+        min-width: 60%;
+        /* max-width: 80%; */
+    }
 }
 
 @media (max-width: 768px) {
     .game {
         min-width: 80%;
-    /* max-width: 95%; */
+        /* max-width: 95%; */
     }
 
     .cell-container {
         gap: 1.5px;
-      }
+    }
 
-      .cell {
-          width: 16px;
-          height: 16px;
-          font-size: 12.5px;
-      }
+    .cell {
+        width: 16px;
+        height: 16px;
+        font-size: 12.5px;
+    }
 
-      .flag-btn {
+    .flag-btn {
         width: 30px;
         height: 30px;
 
-      }
-  }
-
+    }
+}
